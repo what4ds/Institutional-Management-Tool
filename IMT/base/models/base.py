@@ -6,6 +6,7 @@ from django.conf import settings
 rl_category = [(rlcat, rlcat) for rlcat in settings.RELATIONSHIP_CHOICES]
 religion_choices = [(rlch, rlch) for rlch in settings.RELIGION_CHOICES]
 gender_choices = [(gd, gd) for gd in settings.GENDER_CHOICES]
+doc_choices = [(doc,doc) for doc in settings.DOCUMENT_CHOICES]
 
 class Address(models.Model):
     street_address = models.CharField(max_length=125)
@@ -16,6 +17,10 @@ class Address(models.Model):
 
     def __str__(self):
         return "Address Saved !"
+
+class VerificationDocuments(models.Model):
+    documentType = models.CharField(max_length = 20, choices= doc_choices)
+    documentUpload = models.FileField(upload_to="verifydocs/")
     
 
 class RelationshipContact(models.Model):
@@ -40,6 +45,7 @@ class Person(models.Model):
     emailaddress = models.EmailField(max_length= 50, blank= True, null= True)
     address = models.ForeignKey(Address, on_delete=models.DO_NOTHING)
     rlcontactinfo = models.ForeignKey(RelationshipContact, on_delete=models.CASCADE)
+    documents = models.ManyToManyField(VerificationDocuments, related_name="verification_docs") 
     religion = models.CharField(max_length = 25, choices=religion_choices)
     caste = models.CharField(max_length = 30)
     

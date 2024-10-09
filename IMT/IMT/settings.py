@@ -126,7 +126,10 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+DOCS_DIR = BASE_DIR / "documents"
+
 RELIGION_CHOICES = config("RELIGION_CHOICES", default = "Hindu, Muslim, Christian, Sikh, Buddh, Jain, Other").split(',')
 GENDER_CHOICES = config("GENDER_CHOICES", default = "Male, Female, Other").split(",")
 RELATIONSHIP_CHOICES = config("RELATIONSHIP_CHOICES", default = "Mother, Father, Sibling, Grandparents, Other").split(',')
+DOCUMENT_CHOICES = config("DOCUMENT_CHOICES",default = "Adhaar, Driving License, VoterID, Passport").split(",")
 DEBUG = config("DEBUG", default = True, cast = bool)
