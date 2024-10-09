@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -124,3 +125,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RELIGION_CHOICES = config("RELIGION_CHOICES", default = "Hindu, Muslim, Christian, Sikh, Buddh, Jain, Other").split(',')
+GENDER_CHOICES = config("GENDER_CHOICES", default = "Male, Female, Other").split(",")
+RELATIONSHIP_CHOICES = config("RELATIONSHIP_CHOICES", default = "Mother, Father, Sibling, Grandparents, Other").split(',')
+DEBUG = config("DEBUG", default = True, cast = bool)
